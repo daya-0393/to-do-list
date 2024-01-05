@@ -1,0 +1,27 @@
+.container{
+  max-width: 920px;
+  height: 100vh;
+  padding: 50px;
+  margin: 0 auto;
+}
+
+.header{
+  height: 10%;
+  color: #fff;
+}
+.content{
+  position: relative;
+  height: 90%;
+}
+
+.input-container{
+  position: absolute;
+  bottom: 0;
+}
+
+.input{
+  padding: 18px;
+  background-color: transparent;
+  border: 0;
+  margin: 0 10px;
+}
