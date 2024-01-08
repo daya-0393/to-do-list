@@ -94,18 +94,20 @@ button{
   padding: 15px;
   cursor: pointer;
 }
+button:hover{
+  background-color: rgba(255, 255, 255, 0.3);
+}
 
 svg{
   fill: #737373;
 }
-
 .row-item{
   width: 100%;
   display: flex;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
-  padding: 0 15px;
+  padding-left: 15px;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,3 +1,26 @@
 .task{
   margin: 5px 0;
 }
+
+.task .row-item{
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.task-text{
+  margin-left: 10px;
+}
+
+.radio-icon{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #737373;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.radio-icon svg{
+  width: 12px;
+  height: 12px;
+}

@@ -1,27 +1,33 @@
-import CircleIcon from "../icons/IconCircle";
-import CheckIcon from "../icons/IconCheck";
+import IconCheck from "../icons/IconCheck";
 import IconEdit from "../icons/IconEdit";
 import IconDelete from "../icons/IconDelete";
 import './task.css';
 
-const Task = ({text, onDelete, onEdit}) => {
+const Task = ({text, onDelete, onEdit, onSelection, completed}) => {
+
   return (
-    <div className="task">
+    <li className="task">
       <div className="row-item ">
-        <div className='item-select'>
-          <CircleIcon/>
+        <div>
+          <span className='radio-icon' onClick={onSelection}>
+            {completed &&
+              <IconCheck/>
+            }
+          </span>
+          <span className="task-text">{text}</span>
         </div>
-        {text}
         <div className='action-buttons'>
-          <button onClick={onEdit}>
-            <IconEdit/>
-          </button>
+          {!completed && 
+            <button onClick={onEdit}>
+              <IconEdit/>
+            </button>
+          }
           <button onClick={onDelete}>
             <IconDelete/>
           </button>
         </div>
       </div>
-    </div>
+    </li>
   )
 }
 
