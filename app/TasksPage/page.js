@@ -6,8 +6,11 @@ import IconCheck from "../icons/IconCheck";
 import TasksList from "../components/TaskList";
 import Navbar from "../components/Navbar";
 import CompletedTasks from "../components/CompletedTasks";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { UserAuth } from "../context/AuthContext";
+import PulseLoader from 'react-spinners/PulseLoader';
 import styles from './tasks.module.css';
+
 
 const TasksPage = () => {
 
@@ -15,7 +18,13 @@ const TasksPage = () => {
   const [completedTasks, setCompletedTasks] =useState([]);
   const [inputAction, setInputAction] = useState("add");
   const [selectedTask, setSelectedTask] = useState({});
+  const [loading, setLoading] = useState(true);
+  const {user} = UserAuth();
   const input = useRef();
+
+  useEffect(() => {
+    user ? setLoading(false) : setLoading(true);
+  }, [user]);
 
   const addNewTask = () => {
     if(input.current.value !== ""){
@@ -68,52 +77,55 @@ const TasksPage = () => {
 
   return (
     <div className={styles.background}>
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <Navbar/>
-        </header>
-        <main className={styles.main}>
-          <div className={styles.listContainer}>
-            {taskList && 
-              <TasksList 
-                tasks={taskList} 
-                completedTasks={completedTasks}
-                onDelete={(taskId) => deleteTask(taskId)}
-                onEdit={(task) => updateTask(task)}
-                onSelection={(task) => completeTask(task)}
-              />
-            }
-            {completedTasks && completedTasks.length > 0 &&
-              <CompletedTasks
-                tasks={completedTasks}
-                onDelete={(taskId) => deleteCompletedTask(taskId)}
-                onSelection={(task) => resumeTask(task)}
-              />
-            }
-          </div>
-          <div className={styles.inputContainer}>
-            <div className={`task-bar ${styles.inputBar} `}>
-              <span><IconCircle/></span>
-              <input className={styles.input} type='text' ref={input} placeholder="Add a task" onKeyDown={(e) => {
-                if(e.key === "Enter") {
-                  inputAction === 'add' ? addNewTask() : saveUpdatedTask()
-                } 
-              }}/>
-              {inputAction === 'add' ? 
-                <button className="btn" onClick={addNewTask}>
-                  <IconAdd/>
-                </button>
-              : 
-                <button className="btn" onClick={saveUpdatedTask}>
-                  <IconCheck/>
-                </button>
+      {loading ?
+        <PulseLoader loading={loading}/>
+      : 
+        <div className={styles.container}>
+          <header className={styles.header}>
+            <Navbar/>
+          </header>
+          <main className={styles.main}>
+            <div className={styles.listContainer}>
+              {taskList &&
+                <TasksList
+                  tasks={taskList}
+                  completedTasks={completedTasks}
+                  onDelete={(taskId) => deleteTask(taskId)}
+                  onEdit={(task) => updateTask(task)}
+                  onSelection={(task) => completeTask(task)}
+                />
+              }
+              {completedTasks && completedTasks.length > 0 &&
+                <CompletedTasks
+                  tasks={completedTasks}
+                  onDelete={(taskId) => deleteCompletedTask(taskId)}
+                  onSelection={(task) => resumeTask(task)}
+                />
               }
             </div>
-          </div>
-        </main>
-      </div>
+            <div className={styles.inputContainer}>
+              <div className={`task-bar ${styles.inputBar} `}>
+                <span><IconCircle /></span>
+                <input className={styles.input} type='text' ref={input} placeholder="Add a task" onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    inputAction === 'add' ? addNewTask() : saveUpdatedTask()
+                  }
+                }} />
+                {inputAction === 'add' ?
+                  <button className="btn" onClick={addNewTask}>
+                    <IconAdd />
+                  </button>
+                  :
+                  <button className="btn" onClick={saveUpdatedTask}>
+                    <IconCheck />
+                  </button>
+                }
+              </div>
+            </div>
+          </main>
+        </div>
+      }
     </div>
- 
   )
 }
 
