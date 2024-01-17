@@ -17,7 +17,7 @@ const CompletedTasks = ({tasks, onDelete, onSelection}) => {
   return (
 
     <>
-      <button className="completed-btn" onClick={toggleCompletedBtn}>
+      <button className="btn completed-btn" onClick={toggleCompletedBtn}>
         {completedTaskShown ? 
           <IconDownArrow/> :
           <IconRightArrow/>

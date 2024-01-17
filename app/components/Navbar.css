@@ -1,0 +1,84 @@
+.navbar{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-lg{
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.date{
+  font-weight: 300;
+  margin-top: 2px;
+}
+.nav-sm{
+  display: none;
+  position: relative;
+}
+.user-img{
+  margin-right: 10px;
+  border-radius: 50%;
+}
+.logout-btn{
+  color: #fff;
+  padding: 0;
+}
+.collapse{
+  position: absolute;
+  background-color: rgba(255, 255, 255, 1.0);
+  color: black;
+  right: 0;
+  top: 100%;
+  z-index: 2;
+  margin-top: 10px;
+  -moz-box-shadow: 0 0 5px #8c8c8c;
+  -webkit-box-shadow: 0 0 5px #8c8c8c;
+  box-shadow: 0 0 5px #8c8c8c;
+  border-radius: 5px;
+}
+.collapse-lg{
+  width: 100%;
+}
+.collapse ul{
+  list-style-type: none;
+}
+.collapse-lg .list-item{
+  cursor: pointer;
+}
+.collapse-lg .list-item:hover{
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+.list-item{
+  padding: 10px;
+}
+.user-name{
+  font-weight: bold
+}
+.user-email{
+  font-weight: 300;
+  font-size: 14px;
+}
+.submenu-icon{
+  margin-left: 15px;
+}
+.submenu-icon svg{
+  fill: #fff;
+}
+
+@media all and (max-width: 520px) {
+  .nav-sm{
+    display: block;
+  }
+  .nav-lg{
+    display: none;
+  }  
+  .user-img{
+    margin-right: 0;
+  }
+  .user-email{
+    padding: 10px;
+  }
+}

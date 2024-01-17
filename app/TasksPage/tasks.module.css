@@ -1,0 +1,61 @@
+.background{
+  background-color:  #0099cc;
+}
+
+.container{
+  max-width: 920px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+
+.header{
+  height: 10%;
+  color: #fff;
+}
+.main{
+  position: relative;
+  height: 90%;
+}
+
+.inputContainer{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 50px 20px;
+  background-color:  #0099cc;
+}
+
+.inputBar{
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.input{
+  width: 100%;
+  padding: 18px;
+  background-color: transparent;
+  border: 0;
+  margin: 0 10px;
+  outline: none;
+}
+
+.listContainer{
+  margin: 25px 0;
+  max-height: 480px;
+  overflow: auto;
+}
+
+@media all and (max-width: 520px) {
+  .container{
+    padding: 25px 20px;
+  }
+  .input-container{
+    padding: 20px 20px;
+  }
+  .list-container{
+    margin: 0;
+    max-height: 650px;
+  }
+}
