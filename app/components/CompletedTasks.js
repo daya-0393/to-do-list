@@ -17,7 +17,7 @@ const CompletedTasks = ({tasks, onDelete, onSelection}) => {
   return (
 
     <>
-      <button className="btn completed-btn" onClick={toggleCompletedBtn}>
+      <button className="btn completed-btn" onClick={toggleCompletedBtn} aria-label="toggle completed tasks">
         {completedTaskShown ? 
           <IconDownArrow/> :
           <IconRightArrow/>

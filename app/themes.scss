@@ -1,0 +1,28 @@
+@use 'sass:map';
+
+$bg-images: (
+  "bg-1": "../public/images/bg-1.jpg",
+  "bg-2": "../public/images/bg-2.jpg",
+  "bg-3": "../public/images/bg-3.jpg",
+  "bg-4": "../public/images/bg-4.jpg"
+);
+
+//THEMES
+.theme--dark{
+  background-color: $dark;
+}
+
+.theme--light{
+  background-color: $light;
+}
+
+
+@each $name, $url in $bg-images {
+  .theme--#{$name}{
+    background-image: url($url);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+} 
+

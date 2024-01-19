@@ -18,11 +18,11 @@ const Task = ({text, onDelete, onEdit, onSelection, completed}) => {
         </div>
         <div className='action-buttons'>
           {!completed && 
-            <button className="btn" onClick={onEdit}>
+            <button className="btn" onClick={onEdit} aria-label="edit task">
               <IconEdit/>
             </button>
           }
-          <button className="btn" onClick={onDelete}>
+          <button className="btn" onClick={onDelete} aria-label="delete task">
             <IconDelete/>
           </button>
         </div>

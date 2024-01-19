@@ -1,3 +1,5 @@
+@import '../globals.scss';
+
 .navbar{
   width: 100%;
   display: flex;
@@ -66,6 +68,48 @@
 }
 .submenu-icon svg{
   fill: #fff;
+}
+.themes-box{
+  display: grid;
+  grid-template-columns: auto auto;
+  row-gap: 10px;
+  column-gap: 10px;
+  background-color: rgba(255, 255, 255, 1.0);
+  color: $dark;
+  padding: 10px;
+  position: absolute;
+  z-index: 2;
+
+  .theme-option{
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    &.dark{
+      background-color: $dark;
+    }
+    &.light{
+      background-color: $light;
+    }
+    &.bg-img1{
+      background-image: url('../../public/images/bg-1.jpg');
+    }
+    &.bg-img2{
+      background-image: url('../../public/images/bg-2.jpg');
+    }
+    &.bg-img3{
+      background-image: url('../../public/images/bg-3.jpg');
+    }
+    &.bg-img4{
+      background-image: url('../../public/images/bg-4.jpg');
+    }
+  }
+}
+
+.theme-btn{
+  background-color: aqua;
+  margin: 10px;
 }
 
 @media all and (max-width: 520px) {

@@ -3,7 +3,6 @@
 import TasksPage from './TasksPage/page';
 import LoginPage from './LoginPage/page';
 import { UserAuth } from './context/AuthContext';
-import './page.css'
 
 export default function Home() {
 

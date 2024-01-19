@@ -6,10 +6,11 @@ import IconCheck from "../icons/IconCheck";
 import TasksList from "../components/TaskList";
 import Navbar from "../components/Navbar";
 import CompletedTasks from "../components/CompletedTasks";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { UserAuth } from "../context/AuthContext";
+import { ThemeContext } from "../context/ThemeContext";
 import PulseLoader from 'react-spinners/PulseLoader';
-import styles from './tasks.module.css';
+import styles from './tasks.module.scss';
 
 
 const TasksPage = () => {
@@ -20,11 +21,16 @@ const TasksPage = () => {
   const [selectedTask, setSelectedTask] = useState({});
   const [loading, setLoading] = useState(true);
   const {user} = UserAuth();
+  const {theme} = useContext(ThemeContext);
   const input = useRef();
 
   useEffect(() => {
     user ? setLoading(false) : setLoading(true);
   }, [user]);
+
+  useEffect(() => {
+    console.log(theme);
+  }, [theme]);
 
   const addNewTask = () => {
     if(input.current.value !== ""){
@@ -112,11 +118,11 @@ const TasksPage = () => {
                   }
                 }} />
                 {inputAction === 'add' ?
-                  <button className="btn" onClick={addNewTask}>
+                  <button className="btn" onClick={addNewTask} aria-label="add new task">
                     <IconAdd />
                   </button>
                   :
-                  <button className="btn" onClick={saveUpdatedTask}>
+                  <button className="btn" onClick={saveUpdatedTask} aria-label="save edited task">
                     <IconCheck />
                   </button>
                 }
