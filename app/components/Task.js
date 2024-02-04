@@ -1,15 +1,18 @@
 import IconCheck from "../icons/IconCheck";
 import IconEdit from "../icons/IconEdit";
 import IconDelete from "../icons/IconDelete";
-import './task.css';
+import styles from './task.module.scss';
+import { useContext } from "react";
+import TasksContext from "../context/Tasks/TasksContext";
 
-const Task = ({text, onDelete, onEdit, onSelection, completed}) => {
+
+const Task = ({text, completed, onDelete, onEdit, onSelection}) => {
 
   return (
-    <li className={`task ${completed ? 'completed' : ''}`}>
-      <div className="task-bar">
-        <div className="task-text">
-          <span className='radio-icon' onClick={onSelection}>
+    <li className={`${styles.task} ${styles[completed ? 'completed' : '']}`}>
+      <div className={styles.taskBar}>
+        <div className={styles.taskText}>
+          <span className={styles.radioIcon} onClick={onSelection}>
             {completed &&
               <IconCheck/>
             }

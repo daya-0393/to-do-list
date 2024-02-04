@@ -74,11 +74,8 @@
   grid-template-columns: auto auto;
   row-gap: 10px;
   column-gap: 10px;
-  background-color: rgba(255, 255, 255, 1.0);
-  color: $dark;
-  padding: 10px;
-  position: absolute;
-  z-index: 2;
+  width: fit-content;
+  margin: 5px 0;
 
   .theme-option{
     width: 70px;
@@ -93,16 +90,16 @@
       background-color: $light;
     }
     &.bg-img1{
-      background-image: url('../../public/images/bg-1.jpg');
+      background-image: url('../../public/images/bg1-thumbnail.jpg');
     }
     &.bg-img2{
-      background-image: url('../../public/images/bg-2.jpg');
+      background-image: url('../../public/images/bg2-thumbnail.jpg');
     }
     &.bg-img3{
-      background-image: url('../../public/images/bg-3.jpg');
+      background-image: url('../../public/images/bg3-thumbnail.jpg');
     }
     &.bg-img4{
-      background-image: url('../../public/images/bg-4.jpg');
+      background-image: url('../../public/images/bg1-thumbnail.jpg');
     }
   }
 }

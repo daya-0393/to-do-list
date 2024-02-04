@@ -10,6 +10,16 @@ export const AuthContextProvider = ({children}) => {
 
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const localStorage = globalThis.window?.localStorage;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if(currentUser){
+        localStorage.setItem('userId', currentUser.uid);
+      }
+    });
+  }, []);
 
   const logIn = async () => {
     try{
@@ -24,13 +34,8 @@ export const AuthContextProvider = ({children}) => {
 
   const logOut = () => {
     signOut(auth);
+    localStorage.removeItem('userId');
   }
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    })
-  }, []);
   
   return (
     <AuthContext.Provider value={{user, logIn, logOut, error}}>

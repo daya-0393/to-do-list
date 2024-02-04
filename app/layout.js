@@ -2,7 +2,7 @@
 
 import { Quicksand } from 'next/font/google'
 import { AuthContextProvider } from './context/AuthContext'
-import { ThemeProvider } from './context/ThemeProvider'
+import { ThemeProvider } from './context/Themes/ThemeProvider'
 import './styles.scss'
 
 const quicksand = Quicksand({

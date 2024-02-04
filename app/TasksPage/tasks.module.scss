@@ -1,4 +1,4 @@
-.container{
+.tasksInner{
   max-width: 920px;
   height: 100vh;
   margin: 0 auto;
@@ -43,7 +43,7 @@
 }
 
 @media all and (max-width: 520px) {
-  .container{
+  .tasksInner{
     padding: 25px 20px;
   }
   .input-container{

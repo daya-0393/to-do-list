@@ -9,20 +9,32 @@ $bg-images: (
 
 //THEMES
 .theme--dark{
-  background-color: $dark;
+  .tasks-container{
+    background-color: $dark;
+  }
 }
 
 .theme--light{
-  background-color: $light;
+  .tasks-container{
+    background-color: $light;
+    p, h1{
+      color: $dark;
+    }
+    svg{
+      fill: $gray;
+    }
+  }
 }
 
 
 @each $name, $url in $bg-images {
   .theme--#{$name}{
-    background-image: url($url);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    .tasks-container{
+      background-image: url($url);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 } 
 
