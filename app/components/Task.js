@@ -8,6 +8,8 @@ import TasksContext from "../context/Tasks/TasksContext";
 
 const Task = ({text, completed, onDelete, onEdit, onSelection}) => {
 
+  
+
   return (
     <li className={`${styles.task} ${styles[completed ? 'completed' : '']}`}>
       <div className={styles.taskBar}>
@@ -17,7 +19,9 @@ const Task = ({text, completed, onDelete, onEdit, onSelection}) => {
               <IconCheck/>
             }
           </span>
-          <p>{text}</p>
+          <p style={completed ? {textDecoration: 'line-through', textDecorationColor: '#595959'}: {textDecoration: 'none'}}>
+            {text}
+          </p>
         </div>
         <div className='action-buttons'>
           {!completed && 

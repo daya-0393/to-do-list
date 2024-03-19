@@ -24,22 +24,25 @@ export const TasksProvider = ({children}) => {
     try{
       const response = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_DB_DOMAIN}/${userId}.json`);
       const data = await response.json();
+      console.log(data);
       const tasksArray = [];
-      for(let t in data.pending){
-        tasksArray.push({
-          id: t,
-          content: data.pending[t].content
-        });
+      if(data && data.pending){
+        for(let t in data.pending){
+          tasksArray.push({
+            id: t,
+            content: data.pending[t].content
+          });
+        }
       }
       setPendingTasks(tasksArray);
-      console.log(pendingTasks);
     }catch(error){
       console.log(error);
     }
   }
 
   const addNewTask = async (newTask) => {
-    const newTaskRef = push(pendingTasksRef)
+    const newTaskRef = push(pendingTasksRef);
+    console.log(newTaskRef);
     try{
       await set(newTaskRef, newTask);
     }catch(error){
@@ -51,9 +54,8 @@ export const TasksProvider = ({children}) => {
     const deletedTaskRef = `tasks/${userId}/pending/${taskId}`;
     try{
       remove(ref(db, deletedTaskRef));
-      onChildRemoved(deletedTaskRef, (data) => {
-        console.log(data);
-      });
+      // onChildRemoved(deletedTaskRef, (data) => {
+      // });
     }catch(error){
       console.log(error);
     }
@@ -74,12 +76,13 @@ export const TasksProvider = ({children}) => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_DB_DOMAIN}/${userId}.json`);
       const data = await response.json();
       const tasksArray = [];
-      console.log(data);
-      for(let t in data.completed){
-        tasksArray.push({
-          id: t,
-          content: data.completed[t].content
-        });
+      if(data && data.completed){
+        for(let t in data.completed){
+          tasksArray.push({
+            id: t,
+            content: data.completed[t].content
+          });
+        }
       }
       setCompletedTasks(tasksArray);
     }catch(error){
@@ -100,9 +103,8 @@ export const TasksProvider = ({children}) => {
     const deletedTaskRef = `tasks/${userId}/completed/${taskId}`;
     try{
       remove(ref(db, deletedTaskRef));
-      onChildRemoved(deletedTaskRef, (data) => {
-        console.log(data);
-      });
+      // onChildRemoved(deletedTaskRef, (data) => {
+      // });
     }catch(error){
       console.log(error);
     }

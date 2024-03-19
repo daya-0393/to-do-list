@@ -40,15 +40,13 @@ const CompletedTasks = ({tasks, onDelete, onSelection}) => {
     setCompletedTaskShown(current => !current);
   }
 
-  console.log('completed');
-
   return (
 
     <div className="completed-tasks">
       <button className={`btn ${styles.completedBtn}`} onClick={toggleCompletedBtn} aria-label="toggle completed tasks">
-        {completedTaskShown ? 
-          <IconDownArrow/> :
-          <IconRightArrow/>
+        {completedTaskShown 
+          ? <IconDownArrow/> 
+          : <IconRightArrow/>
         }
         Completed
       </button>
