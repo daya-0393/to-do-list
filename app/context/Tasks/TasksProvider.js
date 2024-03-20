@@ -1,6 +1,6 @@
 import TasksContext from "./TasksContext";
 import { useState } from "react";
-import { ref, push, set, onChildRemoved, remove, update } from "firebase/database";
+import { ref, push, get, set, remove, update } from "firebase/database";
 import { db } from "../../firebase/config";
 
 export const TasksProvider = ({children}) => {
@@ -21,28 +21,27 @@ export const TasksProvider = ({children}) => {
 
   //Pending tasks functions
   const getPendingTasks = async () => {
-    try{
-      const response = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_DB_DOMAIN}/${userId}.json`);
-      const data = await response.json();
-      console.log(data);
-      const tasksArray = [];
-      if(data && data.pending){
-        for(let t in data.pending){
+    const tasksArray = [];
+    get(pendingTasksRef)
+    .then((snapshot) => {
+      if(snapshot.exists()){
+        for(let taskId in snapshot.val()){
           tasksArray.push({
-            id: t,
-            content: data.pending[t].content
+            id: taskId,
+            content: snapshot.val()[taskId].content
           });
         }
+      }else{
+        console.log("no data");
       }
       setPendingTasks(tasksArray);
-    }catch(error){
+    }).catch((error) => {
       console.log(error);
-    }
+    })
   }
 
   const addNewTask = async (newTask) => {
     const newTaskRef = push(pendingTasksRef);
-    console.log(newTaskRef);
     try{
       await set(newTaskRef, newTask);
     }catch(error){
@@ -54,8 +53,6 @@ export const TasksProvider = ({children}) => {
     const deletedTaskRef = `tasks/${userId}/pending/${taskId}`;
     try{
       remove(ref(db, deletedTaskRef));
-      // onChildRemoved(deletedTaskRef, (data) => {
-      // });
     }catch(error){
       console.log(error);
     }
@@ -70,24 +67,25 @@ export const TasksProvider = ({children}) => {
     }
   }
 
-  //completed tasks functions
+  //COMPLETED TASKS FUNCTIONS
   const getCompletedTasks = async () => {
-    try{
-      const response = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_DB_DOMAIN}/${userId}.json`);
-      const data = await response.json();
-      const tasksArray = [];
-      if(data && data.completed){
-        for(let t in data.completed){
+    const tasksArray = [];
+    get(completedTasksRef)
+    .then((snapshot) => {
+      if(snapshot.exists()){
+        for(let taskId in snapshot.val()){
           tasksArray.push({
-            id: t,
-            content: data.completed[t].content
+            id: taskId,
+            content: snapshot.val()[taskId].content
           });
         }
+      }else{
+        console.log("no data");
       }
       setCompletedTasks(tasksArray);
-    }catch(error){
+    }).catch((error) => {
       console.log(error);
-    }
+    })
   }
 
   const addCompletedTask = async (newTask) => {
@@ -103,8 +101,6 @@ export const TasksProvider = ({children}) => {
     const deletedTaskRef = `tasks/${userId}/completed/${taskId}`;
     try{
       remove(ref(db, deletedTaskRef));
-      // onChildRemoved(deletedTaskRef, (data) => {
-      // });
     }catch(error){
       console.log(error);
     }
